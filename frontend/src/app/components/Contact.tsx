@@ -25,11 +25,15 @@ export function Contact() {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [focusedField, setFocusedField] = useState<string | null>(null);
 
-  // AXIOS SUBMIT
-  const handleSubmit = async (e: React.FormEvent) => {
+  // CONTACT FORM SUBMIT
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
+    e.stopPropagation();
+
+    console.log("Submit clicked");
 
     try {
       const response = await axios.post(
@@ -41,6 +45,8 @@ export function Contact() {
           message: formData.message,
         }
       );
+
+      console.log(response.data);
 
       if (response.data.success) {
         setIsSubmitted(true);
@@ -55,9 +61,16 @@ export function Contact() {
           });
         }, 3000);
       }
-    } catch (error) {
-      console.error(error);
-      alert("Failed to send message");
+    } catch (error: any) {
+      console.error(
+        "Axios Error:",
+        error.response?.data || error.message
+      );
+
+      alert(
+        error.response?.data?.message ||
+          "Failed to send message"
+      );
     }
   };
 
@@ -108,9 +121,7 @@ export function Contact() {
           </span>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            <ScrollMoveText
-              className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-            >
+            <ScrollMoveText className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Ready to Transform
             </ScrollMoveText>
 
@@ -203,8 +214,10 @@ export function Contact() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-6"
+              >
                 <input
                   type="text"
                   name="name"
