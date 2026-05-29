@@ -6,21 +6,35 @@ require("dotenv").config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://movinva.com",
+      "https://www.movinva.com",
+      "https://movin-va.vercel.app", // replace if different
+    ],
+    methods: ["GET", "POST"],
+  })
+);
+
 app.use(express.json());
 
-// Nodemailer transporter (GoDaddy Professional Email)
+// Nodemailer transporter (GoDaddy + Render Fix)
 const transporter = nodemailer.createTransport({
   host: "smtpout.secureserver.net",
-  port: 465,
-  secure: true,
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  tls: {
+    rejectUnauthorized: false,
+  },
 });
 
-// Verify SMTP connection (helps debug)
+// Verify SMTP connection
 transporter.verify((error, success) => {
   if (error) {
     console.log("SMTP Error:", error);
@@ -75,6 +89,7 @@ app.post("/contact", async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Failed to send message",
+      error: error.message,
     });
   }
 });
