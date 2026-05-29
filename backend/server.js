@@ -9,13 +9,24 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Nodemailer transporter
+// Nodemailer transporter (GoDaddy Professional Email)
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtpout.secureserver.net",
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+});
+
+// Verify SMTP connection (helps debug)
+transporter.verify((error, success) => {
+  if (error) {
+    console.log("SMTP Error:", error);
+  } else {
+    console.log("SMTP Server Ready");
+  }
 });
 
 // Test Route
@@ -37,7 +48,7 @@ app.post("/contact", async (req, res) => {
     }
 
     await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+      from: `"Movin Va Contact Form" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
       replyTo: email,
       subject: `New Contact Form Message - ${service}`,
