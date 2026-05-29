@@ -22,18 +22,20 @@ app.use(express.json());
 
 // Nodemailer transporter (GoDaddy + Render Fix)
 const transporter = nodemailer.createTransport({
-  host: "smtpout.secureserver.net",
+  host: "smtp.office365.com",
   port: 587,
   secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  connectionTimeout: 30000,
+  greetingTimeout: 30000,
+  socketTimeout: 30000,
   tls: {
     rejectUnauthorized: false,
   },
 });
-
 // Verify SMTP connection
 transporter.verify((error, success) => {
   if (error) {
