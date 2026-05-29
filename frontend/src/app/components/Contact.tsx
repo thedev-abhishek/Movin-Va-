@@ -33,7 +33,7 @@ export function Contact() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/contact",
+        "https://movin-va.onrender.com/contact",
         {
           name: formData.name,
           email: formData.email,
