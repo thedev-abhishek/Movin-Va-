@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Outlook / Microsoft 365 SMTP + Force IPv4
 const transporter = nodemailer.createTransport({
-  host: "smtp.office365.com",
+  host: "52.96.91.18",
   port: 587,
   secure: false,
   requireTLS: true,
