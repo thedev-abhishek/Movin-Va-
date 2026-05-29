@@ -1,29 +1,16 @@
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
+const dns = require("dns");
 require("dotenv").config();
 
 const app = express();
 
 // Middleware
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://movinva.com",
-      "https://www.movinva.com",
-      "https://movin-va.vercel.app", // replace if different
-    ],
-    methods: ["GET", "POST"],
-  })
-);
-
+app.use(cors());
 app.use(express.json());
 
-// Nodemailer transporter (GoDaddy + Render Fix)
-const nodemailer = require("nodemailer");
-const dns = require("dns");
-
+// Outlook / Microsoft 365 SMTP + Force IPv4
 const transporter = nodemailer.createTransport({
   host: "smtp.office365.com",
   port: 587,
@@ -43,16 +30,17 @@ const transporter = nodemailer.createTransport({
   greetingTimeout: 30000,
   socketTimeout: 30000,
 
+  // Force IPv4
   family: 4,
-
   dnsLookup: (hostname, options, callback) => {
     dns.lookup(hostname, { family: 4 }, callback);
   },
 });
-// Verify SMTP connection
-transporter.verify((error, success) => {
-  if (error) {
-    console.log("SMTP Error:", error);
+
+// SMTP Verify
+transporter.verify((err) => {
+  if (err) {
+    console.log("SMTP Error:", err);
   } else {
     console.log("SMTP Server Ready");
   }
@@ -83,12 +71,10 @@ app.post("/contact", async (req, res) => {
       subject: `New Contact Form Message - ${service}`,
       html: `
         <h2>New Contact Form Submission</h2>
-
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Service:</strong> ${service}</p>
-
-        <h3>Message:</h3>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Service:</b> ${service}</p>
+        <p><b>Message:</b></p>
         <p>${message}</p>
       `,
     });
@@ -113,5 +99,5 @@ app.post("/contact", async (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server Running on Port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
