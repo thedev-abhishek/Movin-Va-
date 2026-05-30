@@ -32,7 +32,7 @@ app.post("/contact", async (req, res) => {
 
     // Send Email using Resend
     const response = await resend.emails.send({
-  from: "Movin Va <onboarding@resend.dev>",
+  from: "Movin Va <hello@movinva.com>",
   to: "hello@movinva.com",
   replyTo: email,
   subject: `New Contact Form Message - ${service}`,
