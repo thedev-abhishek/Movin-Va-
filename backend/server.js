@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const nodemailer = require("nodemailer");
-const dns = require("dns");
+const { Resend } = require("resend");
 require("dotenv").config();
 
 const app = express();
@@ -10,35 +9,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Outlook / Microsoft 365 SMTP + Force IPv4
-const transporter = nodemailer.createTransport({
-  host: "52.96.91.18",
-  port: 587,
-  secure: false,
-  requireTLS: true,
-
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-
-  tls: {
-    rejectUnauthorized: false,
-    servername: "smtp.office365.com",
-  },
-
-  connectionTimeout: 30000,
-  greetingTimeout: 30000,
-  socketTimeout: 30000,
-});
-// SMTP Verify
-transporter.verify((err) => {
-  if (err) {
-    console.log("SMTP Error:", err);
-  } else {
-    console.log("SMTP Server Ready");
-  }
-});
+// Resend Setup
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Test Route
 app.get("/", (req, res) => {
@@ -58,9 +30,10 @@ app.post("/contact", async (req, res) => {
       });
     }
 
-    await transporter.sendMail({
-      from: `"Movin Va Contact Form" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER,
+    // Send Email using Resend
+    await resend.emails.send({
+      from: "Movin Va <onboarding@resend.dev>",
+      to: "hello@movinva.com",
       replyTo: email,
       subject: `New Contact Form Message - ${service}`,
       html: `
