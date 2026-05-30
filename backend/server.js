@@ -31,20 +31,22 @@ app.post("/contact", async (req, res) => {
     }
 
     // Send Email using Resend
-    await resend.emails.send({
-      from: "Movin Va <onboarding@resend.dev>",
-      to: "hello@movinva.com",
-      replyTo: email,
-      subject: `New Contact Form Message - ${service}`,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Service:</b> ${service}</p>
-        <p><b>Message:</b></p>
-        <p>${message}</p>
-      `,
-    });
+    const response = await resend.emails.send({
+  from: "Movin Va <onboarding@resend.dev>",
+  to: "hello@movinva.com",
+  replyTo: email,
+  subject: `New Contact Form Message - ${service}`,
+  html: `
+    <h2>New Contact Form Submission</h2>
+    <p><b>Name:</b> ${name}</p>
+    <p><b>Email:</b> ${email}</p>
+    <p><b>Service:</b> ${service}</p>
+    <p><b>Message:</b></p>
+    <p>${message}</p>
+  `,
+});
+
+console.log("Resend Response:", response);
 
     res.status(200).json({
       success: true,
