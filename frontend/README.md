@@ -1,7 +1,7 @@
 
 # My Virtual Assistant Website
 
-My personal landing page for virtual assistant services. Built to deliver seamless experiences using React and Tailwind CSS.
+Company's Landing page for virtual assistant services. Built to deliver seamless experiences using React and Tailwind CSS.
 
 ## Quick Start
 
