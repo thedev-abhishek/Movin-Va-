@@ -1,7 +1,8 @@
 import { motion, useInView } from 'motion/react';
 import { useRef, useState } from 'react';
-import { Users, Award, Target, Clock, CheckCircle, Sparkles, Globe, Zap } from 'lucide-react';
+import { Users, Award, Target, Clock, CheckCircle, Globe, Zap } from 'lucide-react';
 import { ScrollMoveText } from './ScrollMoveText';
+
 
 export function About() {
 
@@ -57,9 +58,9 @@ export function About() {
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm font-semibold mb-4"
             >
-              <Sparkles size={16} />
               About Movin-và
             </motion.span>
+
 
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               <ScrollMoveText

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Sparkles, Zap, TrendingUp, Star, Code, Smartphone, UserCheck } from 'lucide-react';
+import { ArrowRight, Zap, TrendingUp, Star, Code, Smartphone, UserCheck } from 'lucide-react';
 import { ScrollMoveText } from './ScrollMoveText';
+
 
 export function Hero() {
 
@@ -86,7 +87,7 @@ export function Hero() {
       </div>
 
       {/* Floating Icons */}
-      {[Sparkles, Zap, TrendingUp, Star].map((Icon, index) => (
+      {[Zap, TrendingUp, Star].map((Icon, index) => (
         <motion.div
           key={index}
           animate={{
@@ -110,6 +111,7 @@ export function Hero() {
         </motion.div>
       ))}
 
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-16 sm:pt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
@@ -125,9 +127,9 @@ export function Hero() {
                 whileHover={{ scale: 1.05 }}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-card/80 backdrop-blur-sm border-2 border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400 rounded-full text-sm font-semibold mb-6 shadow-lg"
               >
-                <Sparkles size={16} className="animate-pulse" />
                 Moving Ahead Virtually
               </motion.span>
+
             </motion.div>
 
             <motion.h1

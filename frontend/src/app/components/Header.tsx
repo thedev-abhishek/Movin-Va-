@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, Sparkles, Moon, Sun } from 'lucide-react';
+import { Menu, X, Moon, Sun } from 'lucide-react';
 
 import { useTheme } from './ThemeProvider';
 
@@ -99,21 +99,35 @@ export function Header() {
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo with Animation */}
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-3 cursor-pointer"
+            initial={{ opacity: 0, scale: 0.85, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            whileHover={{ scale: 1.02 }}
+            className="flex items-center gap-3 cursor-pointer select-none"
           >
-            <motion.div
-              animate={{
-                rotate: [0, 360],
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              className="w-12 h-12 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 rounded-xl flex items-center justify-center shadow-lg"
+              <motion.div
+              className="relative w-12 h-12"
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.35 }}
             >
-              <Sparkles className="text-white" size={24} />
+                <motion.img
+                  src={new URL('../../assets/Movinva_logo.png', import.meta.url).toString()}
+                  alt="Movin-và logo"
+                  className="w-12 h-12 object-contain drop-shadow"
+                  initial={{ opacity: 1, scale: 1, rotate: 0 }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    rotate: [0, 360],
+                  }}
+                  transition={{
+                    duration: 18,
+                    ease: 'linear',
+                    repeat: Infinity,
+                  }}
+                  style={{ transformOrigin: '50% 50%' }}
+                  whileHover={{ filter: 'brightness(1.05) saturate(1.05)', scale: 1.03 }}
+                />
             </motion.div>
             <div>
               <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">

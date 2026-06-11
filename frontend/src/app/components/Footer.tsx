@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin, Heart, Sparkles } from 'lucide-react';
+import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin, Heart } from 'lucide-react';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -70,13 +70,13 @@ export function Footer() {
                 viewport={{ once: true }}
                 className="flex items-center gap-3 mb-4"
               >
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                  className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center"
-                >
-                  <Sparkles className="text-white" size={20} />
-                </motion.div>
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center">
+                  <img
+                    src={new URL('../../assets/Movinva_logo.png', import.meta.url).toString()}
+                    alt="Movin-và logo"
+                    className="w-10 h-10 object-contain drop-shadow"
+                  />
+                </div>
                 <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                   Movin-và
                 </h3>
