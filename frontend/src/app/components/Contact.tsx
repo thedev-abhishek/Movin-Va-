@@ -120,14 +120,23 @@ export function Contact() {
             📧 Get In Touch
           </span>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            <ScrollMoveText className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <ScrollMoveText
+              noVerticalMove
+              direction="ltr"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+            >
               Ready to Transform
             </ScrollMoveText>
 
-            <br />
+          <br />
 
-            <ScrollMoveText className="text-foreground">
+
+            <ScrollMoveText
+              noVerticalMove
+              className="text-foreground"
+              direction="rtl"
+            >
               Your Business?
             </ScrollMoveText>
           </h2>

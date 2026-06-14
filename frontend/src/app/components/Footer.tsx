@@ -1,7 +1,9 @@
 import { motion } from 'motion/react';
+import { useNavigate } from 'react-router';
 import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin, Heart } from 'lucide-react';
 
 export function Footer() {
+  const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
@@ -89,9 +91,9 @@ export function Footer() {
               {/* Contact Info */}
               <div className="space-y-3">
                 {[
-                  { icon: Mail, text: 'hello@movinva.com' },
-                  //{ icon: Phone, text: '+91 123456789' },
-                  { icon: MapPin, text: 'Delaware, USA' },
+                  { icon: Mail, text: 'hello@movinva.com', href: 'mailto:hello@movinva.com' },
+                  //{ icon: Phone, text: '+91 123456789', href: 'tel:+91123456789' },
+                  { icon: MapPin, text: 'Delaware, USA', href: null },
                 ].map((item, index) => {
                   const Icon = item.icon;
                   return (
@@ -104,7 +106,13 @@ export function Footer() {
                       className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors cursor-pointer"
                     >
                       <Icon size={16} />
-                      <span className="text-sm">{item.text}</span>
+                      {item.href ? (
+                        <a href={item.href} className="text-sm">
+                          {item.text}
+                        </a>
+                      ) : (
+                        <span className="text-sm">{item.text}</span>
+                      )}
                     </motion.div>
                   );
                 })}
@@ -124,8 +132,16 @@ export function Footer() {
                     transition={{ delay: index * 0.05 }}
                   >
                     <a 
-                      href="#services" 
-                      onClick={(e) => handleServiceClick(e, service.category)}
+                      href={"#services"}
+                      onClick={(e) => {
+                        // On /contact page, don't try to scroll home-section anchors.
+                        if (window.location.pathname === '/contact') {
+                          e.preventDefault();
+                          navigate('/');
+                          return;
+                        }
+                        handleServiceClick(e, service.category);
+                      }}
                       className="text-gray-400 hover:text-white transition-colors text-sm cursor-pointer"
                     >
                       {service.name}
@@ -148,9 +164,23 @@ export function Footer() {
                     transition={{ delay: index * 0.05 }}
                   >
                     <a 
-                      href={`#${link.id}`} 
+                      href={link.id === 'contact' ? '/contact' : `#${link.id}`} 
                       onClick={(e) => {
+                        if (link.id === 'contact') {
+                          e.preventDefault();
+                          navigate('/contact');
+                          return;
+                        }
+
                         e.preventDefault();
+                        // If user is already on /contact, go back home before scrolling.
+                        if (window.location.pathname === '/contact') {
+                          navigate('/');
+                          setTimeout(() => {
+                            document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
+                          }, 150);
+                          return;
+                        }
                         document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
                       }}
                       className="text-gray-400 hover:text-white transition-colors text-sm cursor-pointer"
@@ -175,8 +205,14 @@ export function Footer() {
                     transition={{ delay: index * 0.05 }}
                   >
                     <a 
-                      href={`#${link.id}`} 
+                      href={link.id === 'contact' ? '/contact' : `#${link.id}`} 
                       onClick={(e) => {
+                        if (link.id === 'contact') {
+                          e.preventDefault();
+                          navigate('/contact');
+                          return;
+                        }
+
                         e.preventDefault();
                         if (link.id) {
                           document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
