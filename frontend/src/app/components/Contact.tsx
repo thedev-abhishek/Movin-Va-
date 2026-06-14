@@ -25,6 +25,8 @@ export function Contact() {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isServiceOpen, setIsServiceOpen] = useState(false);
+
 
   // CONTACT FORM SUBMIT
   const handleSubmit = async (
@@ -234,7 +236,7 @@ export function Contact() {
                   onChange={handleChange}
                   required
                   placeholder="Full Name"
-                  className="w-full px-5 py-3 border rounded-xl"
+                  className="w-full px-5 py-3 border rounded-xl text-foreground placeholder:text-muted-foreground dark:placeholder:text-muted-foreground"
                 />
 
                 <input
@@ -244,22 +246,92 @@ export function Contact() {
                   onChange={handleChange}
                   required
                   placeholder="Email Address"
-                  className="w-full px-5 py-3 border rounded-xl"
+                  className="w-full px-5 py-3 border rounded-xl text-foreground placeholder:text-muted-foreground dark:placeholder:text-muted-foreground"
                 />
 
-                <select
-                  name="service"
-                  value={formData.service}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-5 py-3 border rounded-xl"
-                >
-                  <option value="">Select Service</option>
-                  <option value="web">Web Development</option>
-                  <option value="app">App Development</option>
-                  <option value="va">Virtual Assistance</option>
-                  <option value="marketing">Digital Marketing</option>
-                </select>
+
+                <div className="relative" role="group" aria-label="Service">
+                  <button
+                    type="button"
+                    onClick={() => setIsServiceOpen((v) => !v)}
+                    className="w-full px-5 py-3 border rounded-xl text-left text-foreground"
+                  >
+                    {formData.service === ""
+                      ? "Select Service"
+                      : formData.service === "web"
+                        ? "Web Development"
+                        : formData.service === "app"
+                          ? "App Development"
+                          : formData.service === "va"
+                            ? "Virtual Assistance"
+                            : "Digital Marketing"}
+                  </button>
+
+                  {isServiceOpen && (
+                    <div className="absolute z-10 mt-2 w-full rounded-xl border bg-card shadow-lg overflow-hidden">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFormData((prev) => ({ ...prev, service: "" }));
+                          setIsServiceOpen(false);
+                        }}
+                        className="block w-full px-5 py-3 text-left text-muted-foreground dark:text-muted-foreground hover:bg-accent transition-colors"
+                      >
+                        Select Service
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFormData((prev) => ({ ...prev, service: "web" }));
+                          setIsServiceOpen(false);
+                        }}
+                        className="block w-full px-5 py-3 text-left text-foreground dark:text-foreground hover:bg-accent transition-colors"
+                      >
+                        Web Development
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFormData((prev) => ({ ...prev, service: "app" }));
+                          setIsServiceOpen(false);
+                        }}
+                        className="block w-full px-5 py-3 text-left text-foreground dark:text-foreground hover:bg-accent transition-colors"
+                      >
+                        App Development
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFormData((prev) => ({ ...prev, service: "va" }));
+                          setIsServiceOpen(false);
+                        }}
+                        className="block w-full px-5 py-3 text-left text-foreground dark:text-foreground hover:bg-accent transition-colors"
+                      >
+                        Virtual Assistance
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setFormData((prev) => ({ ...prev, service: "marketing" }));
+                          setIsServiceOpen(false);
+                        }}
+                        className="block w-full px-5 py-3 text-left text-foreground dark:text-foreground hover:bg-accent transition-colors"
+                      >
+                        Digital Marketing
+                      </button>
+                    </div>
+                  )}
+
+                  {/* form submit requirement */}
+                  <input type="hidden" name="service" value={formData.service} required />
+                </div>
+
+
+
 
                 <textarea
                   name="message"
@@ -268,15 +340,42 @@ export function Contact() {
                   required
                   rows={6}
                   placeholder="Your Message"
-                  className="w-full px-5 py-3 border rounded-xl resize-none"
+                  className="w-full px-5 py-3 border rounded-xl resize-none text-foreground placeholder:text-muted-foreground dark:placeholder:text-muted-foreground"
                 />
+
 
                 <button
                   type="submit"
-                  className="w-full py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-xl font-bold flex items-center justify-center gap-3"
+                  className="group w-full py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-xl font-bold flex items-center justify-center gap-3 relative overflow-hidden transition-transform duration-200 hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-blue-400/70 focus:ring-offset-0"
                 >
-                  Send Message
-                  <Send size={18} />
+                  {/* hover shimmer */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 hover:translate-x-full"
+                  />
+
+                  <span className="relative z-10 flex items-center gap-3">
+                    <span className="inline-flex items-center gap-3 relative pr-8">
+                      <span className="relative inline-flex items-center">
+                        Send Message
+                      </span>
+
+
+
+                      <Send
+                        className="transition-transform duration-300 group-hover:translate-x-2"
+                        size={18}
+                      />
+
+                      {/* small bounce to ensure visible motion */}
+                      <span
+                        aria-hidden="true"
+                        className="absolute left-0 top-0 h-0 w-0 group-hover:animate-ping"
+                      />
+                    </span>
+                  </span>
+
+
                 </button>
 
                 <p className="text-xs text-center text-muted-foreground">
