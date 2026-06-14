@@ -46,6 +46,10 @@ export function Hero() {
     }
   };
 
+  const goToContactPage = () => {
+    window.location.assign('/contact');
+  };
+
   const scrollToServices = () => {
     const element = document.getElementById('services');
     if (element) {
@@ -183,7 +187,7 @@ export function Hero() {
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={scrollToContact}
+                onClick={goToContactPage}
                 className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold flex items-center gap-2 shadow-xl hover:shadow-2xl transition-all relative overflow-hidden"
               >
                 <span className="relative z-10">Get Started Today</span>
