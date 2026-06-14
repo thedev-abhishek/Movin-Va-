@@ -30,26 +30,32 @@ app.post("/contact", async (req, res) => {
       });
     }
 
-    // Send Email using Resend
-    const response = await resend.emails.send({
-  from: "Movin Va <hello@movinva.com>",
-  to: "hello@movinva.com",
-  replyTo: email,
-  subject: `New Contact Form Message - ${service}`,
-  html: `
-    <h2>New Contact Form Submission</h2>
-    <p><b>Name:</b> ${name}</p>
-    <p><b>Email:</b> ${email}</p>
-    <p><b>Service:</b> ${service}</p>
-    <p><b>Message:</b></p>
-    <p>${message}</p>
-  `,
-});
+    // Send Email using Resend (do it in background so the frontend responds quickly)
+    ;(async () => {
+      try {
+        await resend.emails.send({
+          from: "Movin Va <hello@movinva.com>",
+          to: "hello@movinva.com",
+          replyTo: email,
+          subject: `New Contact Form Message - ${service}`,
+          html: `
+            <h2>New Contact Form Submission</h2>
+            <p><b>Name:</b> ${name}</p>
+            <p><b>Email:</b> ${email}</p>
+            <p><b>Service:</b> ${service}</p>
+            <p><b>Message:</b></p>
+            <p>${message}</p>
+          `,
+        });
+      } catch (emailError) {
+        console.log("Email Error:", emailError);
+      }
+    })();
 
-
+    // Respond immediately (user-facing success)
     res.status(200).json({
       success: true,
-      message: "Message sent successfully",
+      message: "Message received. We'll email you shortly.",
     });
 
   } catch (error) {
@@ -62,6 +68,7 @@ app.post("/contact", async (req, res) => {
     });
   }
 });
+
 
 // Start Server
 const PORT = process.env.PORT || 5000;

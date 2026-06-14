@@ -26,7 +26,7 @@ export function Contact() {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isServiceOpen, setIsServiceOpen] = useState(false);
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // CONTACT FORM SUBMIT
   const handleSubmit = async (
@@ -35,7 +35,8 @@ export function Contact() {
     e.preventDefault();
     e.stopPropagation();
 
-    console.log("Submit clicked");
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
     try {
       const response = await axios.post(
@@ -45,10 +46,9 @@ export function Contact() {
           email: formData.email,
           service: formData.service,
           message: formData.message,
-        }
+        },
+        { timeout: 15000 }
       );
-
-      console.log(response.data);
 
       if (response.data.success) {
         setIsSubmitted(true);
@@ -73,6 +73,8 @@ export function Contact() {
         error.response?.data?.message ||
           "Failed to send message"
       );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -346,7 +348,8 @@ export function Contact() {
 
                 <button
                   type="submit"
-                  className="group w-full py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-xl font-bold flex items-center justify-center gap-3 relative overflow-hidden transition-transform duration-200 hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-blue-400/70 focus:ring-offset-0"
+                  disabled={isSubmitting}
+                  className="group w-full py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-xl font-bold flex items-center justify-center gap-3 relative overflow-hidden transition-transform duration-200 hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-blue-400/70 focus:ring-offset-0 disabled:opacity-70 disabled:hover:scale-[1]"
                 >
                   {/* hover shimmer */}
                   <span
@@ -357,8 +360,9 @@ export function Contact() {
                   <span className="relative z-10 flex items-center gap-3">
                     <span className="inline-flex items-center gap-3 relative pr-8">
                       <span className="relative inline-flex items-center">
-                        Send Message
+                        {isSubmitting ? "Sending..." : "Send Message"}
                       </span>
+
 
 
 
