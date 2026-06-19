@@ -121,7 +121,7 @@ export function Services() {
       icon: BarChart3,
       title: 'Digital Strategy & Analytics',
       description: 'Data-driven marketing strategies to maximize ROI and business growth.',
-      features: ['Campaign Management', 'Performance Analytics', 'A/B Testing', 'ROI Tracking'],
+      features: ['Campaign Management', 'Performance Analytics', 'A/B Testing'],
       gradient: 'from-orange-400 to-orange-600',
     },
   ];
