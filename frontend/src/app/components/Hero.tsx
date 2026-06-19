@@ -150,7 +150,7 @@ export function Hero() {
                 toOpacity={1}
                 direction="ltr"
               >
-                Movin-và
+                Movin VA
               </ScrollMoveText>
               <br />
               <ScrollMoveText
@@ -175,7 +175,7 @@ export function Hero() {
               className="text-xl text-muted-foreground mb-8 leading-relaxed"
             >
               We give smarter solutions to make things easier. From web development to digital marketing, 
-              virtual assistance to app development—join hands with Movin-và because we help businesses grow.
+              virtual assistance to app development—join hands with Movin VA because we help businesses grow.
             </motion.p>
 
             <motion.div

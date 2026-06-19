@@ -146,7 +146,7 @@ export function Contact() {
           </h2>
 
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Join hands with Movin-Và and let's grow together.
+            Join hands with Movin VA and let's grow together.
           </p>
         </motion.div>
 

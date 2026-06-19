@@ -150,7 +150,7 @@ export function Testimonials() {
           </h2>
 
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Join hands with Movin-và and experience excellence
+            Join hands with Movin VA and experience excellence
           </p>
         </motion.div>
 

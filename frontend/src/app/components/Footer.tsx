@@ -80,7 +80,7 @@ export function Footer() {
                   />
                 </div>
                 <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  Movin-và
+                  Movin VA
                 </h3>
               </motion.div>
               <p className="text-gray-400 mb-6 leading-relaxed">
@@ -93,7 +93,7 @@ export function Footer() {
                 {[
                   { icon: Mail, text: 'hello@movinva.com', href: 'mailto:hello@movinva.com' },
                   //{ icon: Phone, text: '+91 123456789', href: 'tel:+91123456789' },
-                  { icon: MapPin, text: 'Delaware, USA', href: null },
+                  { icon: MapPin, text: 'Texas, USA', href: null },
                 ].map((item, index) => {
                   const Icon = item.icon;
                   return (
@@ -263,14 +263,14 @@ export function Footer() {
             className="border-t border-gray-700 pt-8 text-center"
           >
             <p className="text-gray-400 text-sm flex items-center justify-center gap-2 flex-wrap">
-              <span>© {currentYear} Movin-và. All rights reserved.</span>
+              <span>© {currentYear} Movin VA. All rights reserved.</span>
               <span className="hidden md:inline">•</span>
               <span className="flex items-center gap-1">
-                Made with <Heart size={14} className="text-red-500 animate-pulse" /> by Movin-và Team
+                Made with <Heart size={14} className="text-red-500 animate-pulse" /> by Movin VA Team
               </span>
             </p>
             <p className="text-gray-500 text-xs mt-2">
-              Moving ahead virtually • Delaware, USA
+              Moving ahead virtually • Texas, USA
             </p>
           </motion.div>
         </div>

@@ -40,7 +40,7 @@ export function About() {
   const highlights = [
     'Smarter solutions for easier business operations',
     'Helping businesses grow faster',
-    'Join hands with Movin-và for success'
+    'Join hands with Movin VA for success'
   ];
 
   return (
@@ -58,7 +58,7 @@ export function About() {
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm font-semibold mb-4"
             >
-              About Movin-và
+              About Movin VA
             </motion.span>
 
 
@@ -95,14 +95,14 @@ export function About() {
               transition={{ delay: 0.2 }}
               className="text-lg text-muted-foreground mb-6 leading-relaxed"
             >
-              At <ScrollMoveText
+              At   <ScrollMoveText
                 className="font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
                 fromY={18}
                 toY={0}
                 fromOpacity={0}
                 toOpacity={1}
               >
-                Movin-và
+                Movin VA
               </ScrollMoveText>, we believe in serving our clients in the best way possible. 
 
 
@@ -122,8 +122,8 @@ export function About() {
                 Our Vision
               </h3>
               <p className="text-muted-foreground leading-relaxed">
-                Based in Delaware, USA, we deliver the bestest solutions with Movin-và. 
-                We give smarter solutions to make things easier. Join hands with Movin-và 
+                Based in Texas, USA, we deliver the bestest solutions with Movin VA. 
+                We give smarter solutions to make things easier. Join hands with Movin VA 
                 because we help businesses grow.
               </p>
             </motion.div>
