@@ -8,7 +8,7 @@ export function Footer() {
 
   const socialLinks = [
     { icon: Facebook, href: '#', color: 'hover:bg-blue-600', label: 'Facebook' },
-    { icon: Twitter, href: '#', color: 'hover:bg-blue-400', label: 'Twitter' },
+    { icon: Twitter, href: 'https://x.com/MovinVAInc', color: 'hover:bg-blue-400', label: 'Twitter' },
     { icon: Linkedin, href: 'https://www.linkedin.com/company/movin-va/', color: 'hover:bg-blue-700', label: 'LinkedIn' },
     { icon: Instagram, href: 'https://www.instagram.com/movin_va/', color: 'hover:bg-pink-600', label: 'Instagram' },
   ];
