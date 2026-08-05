@@ -431,22 +431,22 @@ export function Footer() {
 
 
               <span>
-                © {currentYear} Movin VA. All rights reserved.
+                © {currentYear} MOVINZO INTEGRATED. All rights reserved.
               </span>
 
 
-              <span className="hidden md:inline">
+              {/* <span className="hidden md:inline">
                 •
-              </span>
+              </span> */}
 
 
-              <span className="flex items-center gap-1">
+              {/* <span className="flex items-center gap-1">
 
                 Made with
                 <Heart size={14} className="text-red-500 animate-pulse"/>
                 by Movin VA Team
 
-              </span>
+              </span> */}
 
 
             </p>
